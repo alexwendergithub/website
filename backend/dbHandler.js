@@ -8,21 +8,25 @@ class DbHandler {
         if (DbHandler.instance) {
             return DbHandler.instance;
         }
+        this.URLmongo = "mongodb://" + username + ":" + password + "@" + host + ":" + port  + "/admin"
+        console.log(this.URLmongo)
+        this.db = null
+        this.dbName = dbName
+    }
 
-        this.client = new MongoClient(`mongodb://${username}:${password}@${host}:${port}/${dbName}`, { useNewUrlParser: true, useUnifiedTopology: true });
-        
+    async connect(){
+        this.client = new MongoClient(this.URLmongo);
         DbHandler.instance = this;
-
-        this.client.connect()
+        await this.client.connect()
             .then(() => {
-                this.db = this.client.db(dbName);
+                this.db = this.client.db(this.dbName);
                 console.log("Connected to the database.");
             })
             .catch(err => {
                 console.error("Database connection failed:", err);
             });
     }
-    
+
     async insert(collection, value) {
         try {
             const result = await this.db.collection(collection).insertOne(value);
@@ -33,9 +37,9 @@ class DbHandler {
         }
     }
 
-    async read(collection, query) {
+    read(collection, query) {
         try {
-            const result = await this.db.collection(collection).findOne(query);
+            const result = this.db.collection(collection).find(query);
             return result;
         } catch (err) {
             console.error("Read failed:", err);
