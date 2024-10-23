@@ -1,6 +1,5 @@
 const { MongoClient } = require('mongodb');
 
-
 class DbHandler {
     static instance = null;
     
