@@ -26,9 +26,9 @@ class DbHandler {
             });
     }
 
-    async insert(collection, value) {
+    insert(collection, value) {
         try {
-            const result = await this.db.collection(collection).insertOne(value);
+            const result = this.db.collection(collection).insertOne(value);
             return result;
         } catch (err) {
             console.error("Insert failed:", err);
@@ -46,9 +46,9 @@ class DbHandler {
         }
     }
 
-    async delete(collection, query) {
+    delete(collection, query) {
         try {
-            const result = await this.db.collection(collection).deleteOne(query);
+            const result = this.db.collection(collection).deleteOne(query);
             return result;
         } catch (err) {
             console.error("Delete failed:", err);
@@ -56,9 +56,9 @@ class DbHandler {
         }
     }
 
-    async edit(collection, query, update) {
+    edit(collection, query, update) {
         try {
-            const result = await this.db.collection(collection).updateOne(query, { $set: update });
+            const result = this.db.collection(collection).updateOne(query, { $set: update });
             return result;
         } catch (err) {
             console.error("Update failed:", err);
