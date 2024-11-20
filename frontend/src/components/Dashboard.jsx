@@ -50,7 +50,7 @@ export default function Dashboard() {
 }
 
 export const mangasLoader = async () => {
-  const res = await fetch('http://localhost:3000/mangas')
+  const res = await fetch('http://localhost:3001/mangas')
 
   return res.json()
 }
