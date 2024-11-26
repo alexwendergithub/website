@@ -1,13 +1,19 @@
 var tools = require('./dbHandler').DbHandler;
+const path = require('path')
 const express = require('express')
 require("dotenv").config();
 
 const database = new tools(process.env.USERNAME, process.env.PASSWORD, process.env.MONGO_HOST, process.env.PORT, process.env.DB_NAME);
 const app = express()
 const PORT = 3000
-const collection = "pageMarkerSite";
+const collection = process.env.DB_NAME;
 
 app.use(express.json())
+app.use(express.static(path.join(__dirname,"../frontend/build")))
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
+});
 
 app.get('/', (req, res) => {
 
