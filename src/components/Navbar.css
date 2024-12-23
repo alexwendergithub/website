@@ -25,6 +25,10 @@
     margin-left: 40px;
 }
 
+.margin{
+    margin-top: 90px;
+}
+
 .navbar a::before{
     content: '';
     position: absolute;
