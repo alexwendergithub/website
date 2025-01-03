@@ -9,6 +9,7 @@ import NotFoundPage from './pages/NotFoundPage.jsx';
 import RandomPage from './pages/RandomPage.jsx';
 import Navbar from './components/Navbar.jsx';
 import Footer from './components/Footer.jsx';
+import Mangas, {mangasLoader} from './pages/Mangas.jsx';
 
 const router = createBrowserRouter([
   {
@@ -18,7 +19,8 @@ const router = createBrowserRouter([
   },
   {
     path: '/mangas',
-    element: <RandomPage />,
+    element: <Mangas />,
+    loader: mangasLoader,
     children: [
       {
         path: '/mangas/:manga',
