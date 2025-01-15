@@ -53,6 +53,13 @@ const Mangas = ()=>{
 export default Mangas
 
 export const mangasLoader = async () => {
-    const res = await fetch('http://localhost:5173/api/backup')
+    const res = await fetch('http://159.112.183.190:8080/api/mangas', {method: "GET",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin':'*'
+      },
+    })
+
     return res.json()
 }

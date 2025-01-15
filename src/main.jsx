@@ -10,6 +10,7 @@ import RandomPage from './pages/RandomPage.jsx';
 import Navbar from './components/Navbar.jsx';
 import Footer from './components/Footer.jsx';
 import Mangas, {mangasLoader} from './pages/Mangas.jsx';
+import Profile from './pages/Profile.jsx';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
         element: <RandomPage />,
       },
     ],
+  },
+  {
+    path: '/profile',
+    element: <Profile />,
   },
 ]);
 
