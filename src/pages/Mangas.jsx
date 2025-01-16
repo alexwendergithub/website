@@ -7,6 +7,7 @@ import { Grid2,Link,Typography, Card, Button } from '@mui/material';
 import Image from 'mui-image'
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import MangaDialog from '../components/MangaDialog';
+import MangaDialogAdd from '../components/MangaDialogAdd';
 import { useLoaderData } from "react-router-dom"
 
 const Mangas = ()=>{
@@ -44,6 +45,9 @@ const Mangas = ()=>{
                   </Box>
                 </Grid2>
             ))}
+            <Grid2>
+              <MangaDialogAdd/>
+            </Grid2>
           </Grid2>
       </Box>
     )
@@ -53,13 +57,12 @@ const Mangas = ()=>{
 export default Mangas
 
 export const mangasLoader = async () => {
-    const res = await fetch('http://159.112.183.190:8080/api/mangas', {method: "GET",
+    const res = await fetch('http://159.112.183.190:8080/mangas', {method: "GET",
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin':'*'
       },
     })
-
     return res.json()
 }

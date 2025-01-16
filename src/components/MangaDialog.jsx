@@ -11,7 +11,7 @@ import { Grid2, Card, Box, Link} from '@mui/material';
 import Image from 'mui-image';
 export default function MangaDialog(props) {
   const [open, setOpen] = React.useState(false);
-
+  const url = 'http://159.112.183.190:8080/mangas/'+props.manga.id
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -31,12 +31,30 @@ export default function MangaDialog(props) {
         onClose={handleClose}
         PaperProps={{
           component: 'form',
-          onSubmit: (event) => {
-            event.preventDefault();
-            const formData = new FormData(event.currentTarget);
-            const formJson = Object.fromEntries(formData.entries());
-            const email = formJson.email;
-            console.log(email);
+          onSubmit: async (event) => {
+            event.preventDefault()
+            console.log(event.currentTarget.elements.id.value)
+            console.log(url)
+            console.log({
+              "id":event.currentTarget.elements.id.value,
+              "chapter":event.currentTarget.elements.chapter.value,
+              "img":event.currentTarget.elements.img.value,
+              "link":event.currentTarget.elements.link.value
+            })
+            fetch(url,{ method:"PUT",
+              body: JSON.stringify({
+                "id":event.currentTarget.elements.id.value,
+                "title":event.currentTarget.elements.title.value,                
+                "chapter":event.currentTarget.elements.chapter.value,
+                "link":event.currentTarget.elements.link.value,
+                "img":event.currentTarget.elements.img.value
+              }),
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin':'*'
+              },
+            })
             handleClose();
           },
         }}
@@ -96,6 +114,7 @@ export default function MangaDialog(props) {
               fullWidth
               variant="standard"
             />
+            <input type="hidden" id="id" name="id" value={props.manga.id}></input>
             </Grid2>
           </Grid2>
         </DialogContent>
